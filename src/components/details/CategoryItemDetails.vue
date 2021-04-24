@@ -1,28 +1,22 @@
 <template>
   <v-row>
     <character-details
-      v-if="selectedCategory.name === 'people'"
+      v-if="selectedCategory === 'people'"
       :character="categoryItem"
     />
     <planet-details
-      v-if="selectedCategory.name === 'planets'"
+      v-if="selectedCategory === 'planets'"
       :planet="categoryItem"
     />
-    <film-details
-      v-if="selectedCategory.name === 'films'"
-      :film="categoryItem"
-    />
+    <film-details v-if="selectedCategory === 'films'" :film="categoryItem" />
     <species-details
-      v-if="selectedCategory.name === 'species'"
+      v-if="selectedCategory === 'species'"
       :species="categoryItem"
     />
     <vehicle-details
-      v-if="
-        selectedCategory.name === 'vehicles' ||
-        selectedCategory.name === 'starships'
-      "
+      v-if="selectedCategory === 'vehicles' || selectedCategory === 'starships'"
       :vehicle="categoryItem"
-      :category="selectedCategory.name"
+      :category="selectedCategory"
     />
   </v-row>
 </template>
@@ -32,6 +26,7 @@ import CharacterDetails from "./CharacterDetails";
 import FilmDetails from "./FilmDetails.vue";
 import PlanetDetails from "./PlanetDetails";
 import VehicleDetails from "./VehicleDetails.vue";
+import SpeciesDetails from "./SpeciesDetails.vue";
 
 export default {
   components: {
@@ -39,6 +34,7 @@ export default {
     PlanetDetails,
     FilmDetails,
     VehicleDetails,
+    SpeciesDetails,
   },
   name: "CategoryItemDetails",
   props: {
@@ -47,7 +43,7 @@ export default {
       required: true,
     },
     selectedCategory: {
-      type: Object,
+      type: String,
       required: true,
     },
   },

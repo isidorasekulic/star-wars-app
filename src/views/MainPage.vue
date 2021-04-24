@@ -27,7 +27,7 @@
       <category-item-details
         v-if="categoryItem"
         :categoryItem="categoryItem"
-        :selectedCategory="selectedCategory"
+        :selectedCategory="category"
       />
     </v-container>
   </v-main>
@@ -40,6 +40,7 @@ import {
   getCategoryItem,
 } from "../services/StarWarsService";
 import CategoryItemDetails from "../components/details/CategoryItemDetails.vue";
+import EventBus from "@/plugins/event-bus.js";
 
 export default {
   name: "MainPage",
@@ -58,12 +59,14 @@ export default {
       categoryData: {},
       categoryItem: null,
       searchTerm: null,
+      category: null,
     };
   },
   watch: {
     selectedCategory(newValue) {
       this.loadData(newValue.endpoint);
       this.categoryItem = null;
+      this.category = newValue.name;
     },
   },
   methods: {
@@ -88,11 +91,21 @@ export default {
       getCategoryItem(item.url)
         .then((response) => {
           this.categoryItem = response;
+          this.category = this.selectedCategory.name;
         })
         .catch((error) => {
           console.log(error);
         });
     },
+  },
+  created() {
+    EventBus.$on("openDetails", (item, category) => {
+      this.categoryItem = item;
+      this.category = category;
+    });
+  },
+  destroyed() {
+    EventBus.$off("openDetails");
   },
 };
 </script>

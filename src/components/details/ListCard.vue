@@ -18,9 +18,12 @@
 
         <v-expand-transition>
           <v-list v-show="showList">
-            <v-list-item v-for="item in loadedItems" :key="item.url">
+            <v-list-item
+              @click="goToResouce(item)"
+              v-for="item in loadedItems"
+              :key="item.url"
+            >
               <v-list-item-title
-                @click="goToResouce(item.url)"
                 v-text="item.name || item.title"
               ></v-list-item-title>
             </v-list-item>
@@ -32,6 +35,7 @@
 </template>
 <script>
 import { getCategoryItem } from "@/services/StarWarsService";
+import EventBus from "@/plugins/event-bus.js";
 
 export default {
   props: {
@@ -66,7 +70,12 @@ export default {
     },
   },
   methods: {
-    goToResouce() {},
+    goToResouce(item) {
+      const category = item.url
+        .replace("http://swapi.dev/api/", "")
+        .split("/")[0];
+      EventBus.$emit("openDetails", item, category);
+    },
     loadItems(url) {
       getCategoryItem(url)
         .then((response) => {

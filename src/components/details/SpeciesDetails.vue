@@ -52,7 +52,7 @@
             <v-list-item>
               <v-list-item-title
                 >Homeworld:
-                <a :href="homeworld.url">{{
+                <a @click="goToResouce()">{{
                   homeworld.name
                 }}</a></v-list-item-title
               >
@@ -76,6 +76,7 @@
 <script>
 import ListCard from "./ListCard.vue";
 import { getCategoryItem } from "@/services/StarWarsService.js";
+import EventBus from "@/plugins/event-bus.js";
 
 export default {
   components: { ListCard },
@@ -88,10 +89,18 @@ export default {
   },
   watch: {
     species() {
-      this.loadHomeworld();
+      if (this.species.homeworld) {
+        this.loadHomeworld();
+      }
     },
   },
   methods: {
+    goToResouce() {
+      const category = this.homeworld.url
+        .replace("http://swapi.dev/api/", "")
+        .split("/")[0];
+      EventBus.$emit("openDetails", this.homeworld, category);
+    },
     loadHomeworld() {
       getCategoryItem(this.species.homeworld)
         .then((response) => {
@@ -106,6 +115,9 @@ export default {
     return {
       homeworld: {},
     };
+  },
+  created() {
+    this.loadHomeworld();
   },
 };
 </script>
