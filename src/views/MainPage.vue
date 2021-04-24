@@ -2,15 +2,19 @@
   <v-main app class="main">
     <v-container v-if="selectedCategory.name">
       <v-row>
-        <v-text-field
-          label="Search"
-          v-model="searchTerm"
-          append-icon="mdi-file-find"
-          clearable
-          @click:append="search($event)"
-          @click:clear="clear()"
-          ><v-icon>fas fa-search</v-icon></v-text-field
-        >
+        <v-col sm="6" md="6" lg="4" cols="6">
+          <v-text-field
+            label="Search"
+            v-model="searchTerm"
+            append-icon="mdi-file-find"
+            clearable
+            dark
+            v-on:keyup.enter="search()"
+            @click:append="search()"
+            @click:clear="clear()"
+            ><v-icon>fas fa-search</v-icon></v-text-field
+          >
+        </v-col>
       </v-row>
       <v-row>
         <category-grid
@@ -20,6 +24,11 @@
           @changePage="loadData"
         />
       </v-row>
+      <category-item-details
+        v-if="categoryItem"
+        :categoryItem="categoryItem"
+        :selectedCategory="selectedCategory"
+      />
     </v-container>
   </v-main>
 </template>
@@ -30,6 +39,7 @@ import {
   getDataByCategory,
   getCategoryItem,
 } from "../services/StarWarsService";
+import CategoryItemDetails from "../components/details/CategoryItemDetails.vue";
 
 export default {
   name: "MainPage",
@@ -41,6 +51,7 @@ export default {
   },
   components: {
     CategoryGrid,
+    CategoryItemDetails,
   },
   data() {
     return {
@@ -82,18 +93,12 @@ export default {
           console.log(error);
         });
     },
-    async created() {
-      this.$root.$on("openDetails", this.openDialog);
-    },
-    destroyed() {
-      this.$root.$off("openDetails", () => this.openTaDetails());
-    },
   },
 };
 </script>
 
 <style scoped>
 .main {
-  background-color: black;
+  background-color: rgb(95, 95, 95);
 }
 </style>

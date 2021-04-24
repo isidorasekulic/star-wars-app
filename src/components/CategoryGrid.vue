@@ -21,13 +21,14 @@
         </v-card>
       </v-col>
     </v-row>
-    <v-row align="center" justify="center">
-      <v-col align-self="center">
+    <v-row>
+      <v-col class="text-center">
         <v-btn
           elevation="10"
           rounded
           icon
           fab
+          dark
           :disabled="!data.previous"
           @click="goToPreviousPage"
           ><v-icon center> mdi-arrow-left </v-icon></v-btn
@@ -37,6 +38,7 @@
           rounded
           icon
           fab
+          dark
           :disabled="!data.next"
           @click="goToNextPage"
           ><v-icon center> mdi-arrow-right </v-icon></v-btn
@@ -68,7 +70,14 @@ export default {
     imageTemplate() {
       switch (this.category) {
         case "people":
+        case "species":
           return "https://static.tvtropes.org/pmwiki/pub/images/starwarscharacters.jpg";
+        case "films": {
+          return "https://cdn.pocket-lint.com/r/s/1200x/assets/images/147767-tv-feature-what-order-should-you-watch-all-the-star-wars-films-image1-1wdfjceytb.jpg";
+        }
+        case "vehicles":
+        case "starships":
+          return "https://fastly.syfy.com/sites/syfy/files/styles/1200x680/public/wire/legacy/slave1.jpg?offset-y=0";
         default:
           return "https://starwarsblog.starwars.com/wp-content/uploads/2016/09/2Coruscant.jpeg";
       }
