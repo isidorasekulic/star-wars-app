@@ -15,17 +15,6 @@
           </v-list-item-content>
         </v-list-item>
 
-        <v-list-item three-line>
-          <v-list-item-content>
-            <v-list-item-title>Opening crawl: </v-list-item-title>
-            <v-list-item-subtitle>
-              <span>
-                {{ film.opening_crawl }}
-              </span>
-            </v-list-item-subtitle>
-          </v-list-item-content>
-        </v-list-item>
-
         <v-list-item>
           <v-list-item-title>Director: {{ film.director }}</v-list-item-title>
         </v-list-item>
@@ -40,6 +29,15 @@
           >
         </v-list-item>
       </v-card>
+      <v-row>
+        <v-col>
+          <v-textarea
+            outlined
+            rows="10"
+            :value="film.opening_crawl"
+          ></v-textarea>
+        </v-col>
+      </v-row>
     </v-col>
     <v-col>
       <list-card title="Characters" :itemsUrls="film.characters" />
