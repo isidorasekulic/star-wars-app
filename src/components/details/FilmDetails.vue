@@ -1,6 +1,6 @@
 <template>
   <v-row>
-    <v-col sm="12" md="6" lg="6">
+    <v-col sm="12" md="6" lg="6" cols="12">
       <v-card elevation="0">
         <v-card-title>Film details</v-card-title>
         <v-list-item>
