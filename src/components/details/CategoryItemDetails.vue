@@ -3,24 +3,25 @@
     <v-card min-width="100%" dark>
       <v-container fluid>
         <character-details
-          v-if="selectedCategory === 'people'"
+          v-if="selectedCategory === Category.PEOPLE"
           :character="categoryItem"
         />
         <planet-details
-          v-if="selectedCategory === 'planets'"
+          v-if="selectedCategory === Category.PLANETS"
           :planet="categoryItem"
         />
         <film-details
-          v-if="selectedCategory === 'films'"
+          v-if="selectedCategory === Category.FILMS"
           :film="categoryItem"
         />
         <species-details
-          v-if="selectedCategory === 'species'"
+          v-if="selectedCategory === Category.SPECIES"
           :species="categoryItem"
         />
         <vehicle-details
           v-if="
-            selectedCategory === 'vehicles' || selectedCategory === 'starships'
+            selectedCategory === Category.VEHICLES ||
+            selectedCategory === Category.STARSHIPS
           "
           :vehicle="categoryItem"
           :category="selectedCategory"
@@ -36,6 +37,7 @@ import FilmDetails from "./FilmDetails.vue";
 import PlanetDetails from "./PlanetDetails";
 import VehicleDetails from "./VehicleDetails.vue";
 import SpeciesDetails from "./SpeciesDetails.vue";
+import { Category } from "@/constants/Category";
 
 export default {
   components: {
@@ -55,6 +57,11 @@ export default {
       type: String,
       required: true,
     },
+  },
+  data() {
+    return {
+      Category: Category,
+    };
   },
 };
 </script>

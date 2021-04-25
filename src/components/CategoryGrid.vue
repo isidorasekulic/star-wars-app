@@ -1,13 +1,7 @@
 <template>
   <v-container>
     <v-row>
-      <v-col
-        v-for="item in data.results"
-        :key="item.name || item.title"
-        sm="6"
-        md="4"
-        lg="2"
-      >
+      <v-col v-for="item in data.results" :key="item.url" sm="6" md="4" lg="2">
         <v-card @click="openDetails(item)">
           <v-img
             :src="imageTemplate"
@@ -67,23 +61,8 @@ export default {
   },
   computed: {
     imageTemplate() {
-      switch (this.category) {
-        case "people":
-        case "species":
-          return "https://static.tvtropes.org/pmwiki/pub/images/starwarscharacters.jpg";
-        case "films": {
-          return "https://cdn.pocket-lint.com/r/s/1200x/assets/images/147767-tv-feature-what-order-should-you-watch-all-the-star-wars-films-image1-1wdfjceytb.jpg";
-        }
-        case "vehicles":
-        case "starships":
-          return "https://fastly.syfy.com/sites/syfy/files/styles/1200x680/public/wire/legacy/slave1.jpg?offset-y=0";
-        default:
-          return "https://starwarsblog.starwars.com/wp-content/uploads/2016/09/2Coruscant.jpeg";
-      }
+      return require("@/assets/" + this.category + ".jpg");
     },
-  },
-  watch: {
-    data: function () {},
   },
   methods: {
     openDetails(value) {

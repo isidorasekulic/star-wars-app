@@ -58,19 +58,19 @@
           >
         </v-list-item>
 
-        <v-list-item v-if="category === 'spaceships'">
+        <v-list-item v-if="!isVehicle">
           <v-list-item-title
             >Starship class: {{ vehicle.starship_class }}</v-list-item-title
           >
         </v-list-item>
 
-        <v-list-item v-if="category === 'vehicles'">
+        <v-list-item v-if="isVehicle">
           <v-list-item-title
             >Vehicle class: {{ vehicle.vehicle_class }}</v-list-item-title
           >
         </v-list-item>
 
-        <v-list-item v-if="category === 'spaceships'">
+        <v-list-item v-if="!isVehicle">
           <v-list-item-title
             >Hyperdrive rating:
             {{ vehicle.hyperdrive_rating }}</v-list-item-title
@@ -86,6 +86,7 @@
 </template>
 <script>
 import ListCard from "./ListCard.vue";
+import { Category } from "@/constants/Category";
 
 export default {
   components: { ListCard },
@@ -98,6 +99,11 @@ export default {
     category: {
       type: String,
       required: true,
+    },
+  },
+  computed: {
+    isVehicle() {
+      return this.category === Category.VEHICLES;
     },
   },
 };
