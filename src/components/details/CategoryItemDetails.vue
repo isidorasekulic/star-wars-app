@@ -1,23 +1,32 @@
 <template>
   <v-row>
-    <character-details
-      v-if="selectedCategory === 'people'"
-      :character="categoryItem"
-    />
-    <planet-details
-      v-if="selectedCategory === 'planets'"
-      :planet="categoryItem"
-    />
-    <film-details v-if="selectedCategory === 'films'" :film="categoryItem" />
-    <species-details
-      v-if="selectedCategory === 'species'"
-      :species="categoryItem"
-    />
-    <vehicle-details
-      v-if="selectedCategory === 'vehicles' || selectedCategory === 'starships'"
-      :vehicle="categoryItem"
-      :category="selectedCategory"
-    />
+    <v-card min-width="100%" dark>
+      <v-container fluid>
+        <character-details
+          v-if="selectedCategory === 'people'"
+          :character="categoryItem"
+        />
+        <planet-details
+          v-if="selectedCategory === 'planets'"
+          :planet="categoryItem"
+        />
+        <film-details
+          v-if="selectedCategory === 'films'"
+          :film="categoryItem"
+        />
+        <species-details
+          v-if="selectedCategory === 'species'"
+          :species="categoryItem"
+        />
+        <vehicle-details
+          v-if="
+            selectedCategory === 'vehicles' || selectedCategory === 'starships'
+          "
+          :vehicle="categoryItem"
+          :category="selectedCategory"
+        />
+      </v-container>
+    </v-card>
   </v-row>
 </template>
 

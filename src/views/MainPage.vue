@@ -2,18 +2,17 @@
   <v-main app class="main">
     <v-container v-if="selectedCategory.name">
       <v-row>
-        <v-col sm="6" md="6" lg="4" cols="6">
+        <v-col sm="6" md="6" lg="4">
           <v-text-field
             label="Search"
             v-model="searchTerm"
-            append-icon="mdi-file-find"
+            append-icon="mdi-magnify"
             clearable
             dark
             v-on:keyup.enter="search()"
             @click:append="search()"
             @click:clear="clear()"
-            ><v-icon>fas fa-search</v-icon></v-text-field
-          >
+          ></v-text-field>
         </v-col>
       </v-row>
       <v-row>

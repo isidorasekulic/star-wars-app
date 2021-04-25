@@ -6,12 +6,11 @@
     shrink-on-scroll
     prominent
     src="../assets/logo.jpg"
+    height="200px"
   >
-    <v-spacer></v-spacer>
-
     <template v-slot:extension>
-      <v-tabs centered optional>
-        <v-tabs-slider color="teal lighten-3"></v-tabs-slider>
+      <v-tabs show-arrows centered optional>
+        <v-tabs-slider></v-tabs-slider>
         <v-tab
           v-for="(endpoint, category) in categories"
           :key="category"

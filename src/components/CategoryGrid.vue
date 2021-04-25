@@ -2,12 +2,11 @@
   <v-container>
     <v-row>
       <v-col
-        sm="12"
-        md="2"
-        lg="2"
         v-for="item in data.results"
         :key="item.name || item.title"
-        cols="6"
+        sm="6"
+        md="4"
+        lg="2"
       >
         <v-card @click="openDetails(item)">
           <v-img
@@ -101,16 +100,6 @@ export default {
 </script>
 
 <style scoped>
-.table {
-  position: relative;
-  align-content: center;
-  width: 40%;
-}
-
-.v-data-table {
-  font-size: 18px !important;
-}
-
 .row-pointer >>> tbody tr :hover {
   cursor: pointer;
 }
